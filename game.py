@@ -1,13 +1,20 @@
 import pygame
+from logic import move_player, rotate_player
 
 # pygame setup
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-dt = 0
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+class Player:
+    def __init__(self):
+        self.dt = clock.tick(60) / 1000
+        self.angle = 0
+        self.pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+    dt = 0
+
+player = Player()
 
 while running:
     # poll for events
@@ -17,26 +24,22 @@ while running:
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    screen.fill("black")
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+    pygame.draw.circle(screen, "red", player.pos, 40) # GENERATE IMAGE HERE
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
+        move_player(True, player)
     if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
+        move_player(False, player)
     if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
+        angle = rotate_player(True, player)
     if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
+        angle = rotate_player(False, player)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
 
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
-    dt = clock.tick(60) / 1000
-
 pygame.quit()
+
