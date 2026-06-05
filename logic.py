@@ -1,18 +1,18 @@
 import pygame
 
-def move_player(isForward, player):
+def move_player(isForward, player, dt):
     movement = pygame.Vector2()
-    movement.from_polar((300 * player.dt, player.angle))
+    movement.from_polar((300 * dt, player.angle))
 
     if isForward:
         player.pos += movement
     else:
         player.pos -= movement
 
-def rotate_player(isLeft, player):
-    if isLeft:
-        player.angle += player.dt * 120
+def rotate_player(isLeft, player, dt):
+    if isLeft: # vertical screen is inverted... why bruv
+        player.angle -= dt * 120 
     else:
-        player.angle -= player.dt * 120
+        player.angle += dt * 120
 
-    # Transform the figure once we have one
+    # transform the figure once we have one

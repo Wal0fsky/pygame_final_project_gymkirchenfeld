@@ -1,26 +1,25 @@
 import pygame
 from logic import move_player, rotate_player
 
-# pygame setup
-pygame.init()
+pygame.init() # source: https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
+dt = 0
 
 class Player:
     def __init__(self):
-        self.dt = clock.tick(60) / 1000
         self.angle = 0
         self.pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-    dt = 0
 
 player = Player()
 
-while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+while running: # game loop cycle
+    dt = clock.tick(60) / 1000
+    
+    
+    for event in pygame.event.get(): # event listener
+        if event.type == pygame.QUIT: # player pressed "X"
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
@@ -30,16 +29,15 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
-        move_player(True, player)
+        move_player(True, player, dt)
     if keys[pygame.K_s]:
-        move_player(False, player)
+        move_player(False, player, dt)
     if keys[pygame.K_a]:
-        angle = rotate_player(True, player)
+        angle = rotate_player(True, player, dt)
     if keys[pygame.K_d]:
-        angle = rotate_player(False, player)
+        angle = rotate_player(False, player, dt)
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+    pygame.display.flip() # pygame generates stuff on a hidden layer and then swaps it to the layer we see so it avoids screen flickering. This allows us to see the stuff after a frame
 
 pygame.quit()
 
