@@ -35,6 +35,7 @@ while running: # game loop cycle
     player.rect = player.image.get_rect(center=(player.pos))
     player.hitbox.center = player.pos
     pygame.draw.rect(screen, (255, 0, 0), player.hitbox, 2) # for debugging
+    pygame.draw.rect(screen, (255, 0, 0), player.rect, 2)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
@@ -51,7 +52,8 @@ while running: # game loop cycle
             rotate_player(True, player, dt)
         else:
             rotate_player(False, player, dt)
-
+    if keys[pygame.K_SPACE]:
+        pass # later
     pygame.display.flip() # pygame generates stuff on a hidden layer and then swaps it to the layer we see so it avoids screen flickering. This allows us to see the stuff after a frame
 
 pygame.quit()
