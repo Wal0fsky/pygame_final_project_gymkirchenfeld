@@ -59,6 +59,8 @@ class Projectile(Game_Object):
         super().__init__(angle, pos.copy())
         self.initialization_vect = pygame.Vector2()
         self.initialization_vect.from_polar(((player.HITBOX_POINTS[0] - player.HITBOX_POINTS[3]).y, self.angle))
+        self.start_point = self.pos + self.initialization_vect
+        self.end_point = self.pos + self.initialization_vect * 2
 
     def upd(self, screen, speed, dt):
         self.move(True, dt, speed)
