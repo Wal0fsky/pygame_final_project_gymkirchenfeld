@@ -84,6 +84,8 @@ while running: # game loop cycle
         enemies.append(enemy)
     
     for enemy in enemies:
+        direction = player.pos - enemy.pos
+        enemy.angle = direction.as_polar()[1]
         enemy.pos.move_towards_ip(player.pos, random.randint(2, 4))
         enemy.upd(screen)
 
@@ -106,4 +108,3 @@ while running: # game loop cycle
     pygame.display.flip() # pygame generates stuff on a hidden layer and then swaps it to the layer we see so it avoids screen flickering. This allows us to see the stuff after a frame
 
 pygame.quit()
-
