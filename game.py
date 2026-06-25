@@ -102,7 +102,10 @@ while running: # game loop cycle
 
     player.upd(screen)
 
-    # for testing pygame.draw.polygon(screen, (255, 0, 0), player.upd_hitbox_points)
+    # for testing
+    # pygame.draw.polygon(screen, (255, 0, 0), player.upd_hitbox_points)
+    # for enemy in enemies:
+    #    pygame.draw.polygon(screen, (255, 0, 0), enemy.upd_hitbox_points)
     # for testing pygame.draw.rect(screen, (255, 0, 0), player.rect, 2)
     
     pygame.display.flip() # pygame generates stuff on a hidden layer and then swaps it to the layer we see so it avoids screen flickering. This allows us to see the stuff after a frame
